@@ -17,6 +17,7 @@ import { CountryTableComponent } from './components/country-table/country-table.
     ByCapitalPageComponent,
     ByCountryPageComponent,
     ByRegionPageComponent,
+    CountryPageComponent,
     // CapitalTableComponent,
     CountryTableComponent,
 
