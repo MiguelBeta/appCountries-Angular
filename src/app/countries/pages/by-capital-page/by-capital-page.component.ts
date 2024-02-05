@@ -5,7 +5,7 @@ import { Country } from '../../interfaces/country';
 @Component({
   selector: 'app-by-capital-page',
   templateUrl: './by-capital-page.component.html',
-  styles: ``
+  styles: []
 })
 export class ByCapitalPageComponent {
 
@@ -13,8 +13,8 @@ export class ByCapitalPageComponent {
 
   constructor( private countriesService : CountriesService ) {}
 
-  searchByCapital( term: string ): void {
-    this.countriesService.searchCapital( term )
+  searchByCapital( capital: string ): void {
+    this.countriesService.searchCapital( capital )
       .subscribe( countries => {
         this.countries = countries;
       });
