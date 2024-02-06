@@ -1,22 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/country';
 import { CountriesService } from '../../services/countries.service';
+import { type } from 'os';
+import { Region } from '../../interfaces/region.type';
+
 
 @Component({
   selector: 'app-by-region-page',
   templateUrl: './by-region-page.component.html',
   styles: ``
 })
-export class ByRegionPageComponent {
+export class ByRegionPageComponent implements OnInit {
 
 
   @Input()
   public countries: Country[] = [];
+  public regions: Region[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+  public selectedRegion?: Region;
 
-  constructor( private CountriesService : CountriesService ) {}
+  constructor( private countriesService : CountriesService ) {}
 
-  searchByCountry( region: string ): void {
-    this.CountriesService.searchCountry( region )
+  //Mantiene la informacion en pantalla
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheStore.byRegion.countries;
+    this.selectedRegion = this.countriesService.cacheStore.byRegion.region;
+  }
+
+
+
+  searchByRegion( region: Region ): void {
+
+    this.selectedRegion = region;
+
+    this.countriesService.searchRegion( region )
       .subscribe( countries => {
         this.countries = countries;
       });
